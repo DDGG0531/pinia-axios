@@ -5,7 +5,7 @@ const router = createRouter({
   routes: [
     { path: '/', redirect: '/translate' },
     { path: '/translate', component: () => import('@/views/Translate.vue') },
-    { path: '/list', component: () => import('@/views/List.vue') }
+    { path: '/listPage', component: () => import('@/views/ListPage.vue') }
   ]
 })
 

@@ -4,6 +4,8 @@ import PiniaMutate from '@/components/PiniaMutate.vue'
 </script>
 
 <template>
-  <LocalMutate> </LocalMutate>
-  <PiniaMutate> </PiniaMutate>
+  <div class="flex flex-col gap-5">
+    <LocalMutate> </LocalMutate>
+    <PiniaMutate> </PiniaMutate>
+  </div>
 </template>

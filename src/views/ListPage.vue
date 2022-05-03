@@ -1,6 +1,7 @@
 <script setup lang="ts">
+import List from '@/components/List.vue'
 </script>
 
 <template>
-  <div>列表</div>
+  <List />
 </template>

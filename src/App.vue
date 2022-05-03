@@ -1,17 +1,16 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Layout from '@/components/Layout.vue'
+import Header from '@/components/Header.vue'
+import PageContent from '@/components/PageContent.vue'
+</script>
 
 <template>
-  <!-- NavBar Switch Page -->
-  <div class="flex gap-3">
-    <Btn>
-      <router-link :to="{ path: '/translate' }">翻譯</router-link>
-    </Btn>
-
-    <Btn>
-      <router-link :to="{ path: '/list' }">列表</router-link>
-    </Btn>
+  <div>
+    <Layout>
+      <Header></Header>
+      <PageContent>
+        <router-view></router-view>
+      </PageContent>
+    </Layout>
   </div>
-
-
-  <router-view></router-view>
 </template>

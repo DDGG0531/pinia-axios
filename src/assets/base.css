@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  #app {
+    @apply bg-orange-600;
+    @apply font-sans;
+    @apply antialiased;
+    @apply text-gray-700;
+  }
+}
+
+@layer utilities {
+  .glass {
+    @apply backdrop-opacity-20 backdrop-invert bg-white/50;
+  }
+}
