@@ -1,9 +1,17 @@
-<script setup lang="ts">
-import LocalMutate from '@/views/LocalMutate.vue'
-import PiniaMutate from '@/views/PiniaMutate.vue'
-</script>
+<script setup lang="ts"></script>
 
 <template>
-  <LocalMutate> </LocalMutate>
-  <PiniaMutate> </PiniaMutate>
+  <!-- NavBar Switch Page -->
+  <div class="flex gap-3">
+    <Btn>
+      <router-link :to="{ path: '/translate' }">翻譯</router-link>
+    </Btn>
+
+    <Btn>
+      <router-link :to="{ path: '/list' }">列表</router-link>
+    </Btn>
+  </div>
+
+
+  <router-view></router-view>
 </template>

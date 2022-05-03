@@ -8,10 +8,10 @@ export const apiGoogleTranslate = (sentence: string) => {
 
   const options = {
     method: 'POST',
-    url: 'https://google-translate1.p.rapidapi.com/language/translate/v2',
+    url: import.meta.env.VITE_RapidAPI_URL_Google_Translate,
     headers: {
       'content-type': 'application/x-www-form-urlencoded',
-      'X-RapidAPI-Host': import.meta.env.VITE_RapidAPI_Host,
+      'X-RapidAPI-Host': import.meta.env.VITE_RapidAPI_Host_Google_Translate,
       'X-RapidAPI-Key': import.meta.env.VITE_RapidAPI_Key
     },
     data: encodedParams
