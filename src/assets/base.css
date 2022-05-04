@@ -8,6 +8,9 @@
     @apply font-sans;
     @apply antialiased;
     @apply text-gray-700;
+    background-image: url('/wallpaper.jpg');
+    background-size: cover;
+    background-position: center;
   }
 }
 

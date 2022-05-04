@@ -16,17 +16,13 @@ const props = defineProps<{
     </div>
 
     <div class="ml-auto flex gap-3">
-      <button
-        class="rounded-full hover:outline outline-offset-2 outline-blue-500 p-3"
-      >
+      <Btn>
         <TrashIcon class="h-5 w-5" />
-      </button>
+      </Btn>
 
-      <button
-        class="rounded-full hover:outline outline-offset-2 outline-blue-500 p-3"
-      >
+      <Btn>
         <PencilIcon class="h-5 w-5" />
-      </button>
+      </Btn>
     </div>
   </div>
 </template>

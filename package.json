@@ -12,9 +12,11 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@headlessui/vue": "^1.6.1",
     "@heroicons/vue": "^1.0.6",
     "@types/lodash-es": "^4.17.6",
     "@vueuse/core": "^8.4.0",
+    "@vueuse/motion": "^2.0.0-beta.12",
     "axios": "^0.27.1",
     "lodash-es": "^4.17.21",
     "pinia": "^2.0.13",
