@@ -4,9 +4,14 @@ import { useMotion } from '@vueuse/motion'
 import type { MotionVariants } from '@vueuse/motion'
 
 // eslint-disable-next-line
-const { initMoveUp = false, tapped = true } = defineProps<{
+const {
+  initMoveUp = false,
+  tapped = true,
+  disabled = false
+} = defineProps<{
   initMoveUp?: boolean
   tapped?: boolean
+  disabled?: boolean
 }>()
 
 const button = ref<HTMLElement>()
@@ -35,9 +40,12 @@ const motionInstance = useMotion(button, variants)
 
 <template>
   <button
-    ref="button"
+    :disabled="disabled"
     v-motion="motionInstance"
-    class="rounded inline-flex p-3 items-center justify-center glass"
+    :class="[
+      'rounded inline-flex p-3 items-center justify-center glass',
+      disabled ? 'cursor-not-allowed' : ''
+    ]"
   >
     <slot></slot>
   </button>

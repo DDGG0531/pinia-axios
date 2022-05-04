@@ -21,8 +21,8 @@
     "lodash-es": "^4.17.21",
     "pinia": "^2.0.13",
     "vue": "^3.2.33",
-    "vue-query": "^1.22.3",
-    "vue-router": "^4.0.14"
+    "vue-query": "^1.23.0",
+    "vue-router": "^4.0.15"
   },
   "devDependencies": {
     "@rushstack/eslint-patch": "^1.1.0",
