@@ -4,8 +4,11 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     { path: '/', redirect: '/translate' },
-    { path: '/translate', component: () => import('@/views/Translate.vue') },
-    { path: '/listPage', component: () => import('@/views/ListPage.vue') }
+    {
+      path: '/translate',
+      component: () => import('@/views/Translate/index.js')
+    },
+    { path: '/listPage', component: () => import('@/views/ListPage/index.js') }
   ]
 })
 

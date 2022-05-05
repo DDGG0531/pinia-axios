@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue'
 import { useQuery, useQueryClient, useMutation } from 'vue-query'
+// https://tkdodo.eu/blog/effective-react-query-keys
+// follow this post to find a place to store the query key, neither global nor local
+import { listKeys } from '@/views/ListPage/queries.js'
 import {
   apiNote2_List,
   apiNote2_Delete,
@@ -12,7 +15,6 @@ import { PlusIcon } from '@heroicons/vue/outline'
 import MainDialog from '@/components/MainDialog.vue'
 import type { Note2 } from '@/apis/note2'
 import { cloneDeep } from 'lodash-es'
-import { computed } from '@vue/reactivity'
 
 /**
  * 使用refetchOnWindowFocus參數，避免開發時，因為devtools的開啟，多打api
@@ -20,40 +22,35 @@ import { computed } from '@vue/reactivity'
 
 const queryClient = useQueryClient()
 
-const { mutate: editMutate, isLoading: editLoading } = useMutation(
-  (item: Note2) => apiNote2_Edit(item),
-  {
-    onSuccess: () => {
-      queryClient.invalidateQueries('list')
+const creatMutationSuccess = () => ({
+  onSuccess: () => {
+    return queryClient.invalidateQueries(listKeys.all).then(() => {
       isOpen.value = false
-    }
+    })
   }
-)
-
-const { mutate: createMutate, isLoading: createLoading } = useMutation(
-  (note: string) => apiNote2_Create(note),
-  {
-    onSuccess: () => {
-      queryClient.invalidateQueries('list')
-      isOpen.value = false
-    }
-  }
-)
-const { mutate: deleteMutate, isLoading: deletLoading } = useMutation(
-  (id: number) => apiNote2_Delete(id),
-  {
-    onSuccess: () => {
-      queryClient.invalidateQueries('list')
-      isOpen.value = false
-    }
-  }
-)
-
-const isWIPLoading = computed(() => editLoading.value || createLoading.value)
-
-const { isLoading, data: list } = useQuery('list', () => apiNote2_List(), {
-  refetchOnWindowFocus: false
 })
+
+const editList = useMutation(
+  (item: Note2) => apiNote2_Edit(item),
+  creatMutationSuccess()
+)
+
+const createList = useMutation(
+  (note: string) => apiNote2_Create(note),
+  creatMutationSuccess()
+)
+const deleteList = useMutation(
+  (id: number) => apiNote2_Delete(id),
+  creatMutationSuccess()
+)
+
+const { isLoading, data: list } = useQuery(
+  listKeys.all,
+  () => apiNote2_List(),
+  {
+    refetchOnWindowFocus: false
+  }
+)
 
 const isOpen = ref(false)
 
@@ -75,14 +72,14 @@ function handleEditClick(item: Note2) {
 
 function handleRemoveClick(item: Note2) {
   let [id] = item
-  deleteMutate(id)
+  deleteList.mutate(id)
 }
 
 function handleSubmit() {
   if (WIP_Type.value === 'create') {
-    createMutate(WIPData.value[1])
+    createList.mutate(WIPData.value[1])
   } else {
-    editMutate(WIPData.value)
+    editList.mutate(WIPData.value)
   }
 }
 
@@ -137,8 +134,16 @@ function createNewList(): Note2 {
 
       <template #button>
         <div class="flex gap-3 justify-end">
-          <Btn @click="handleSubmit" :disabled="isWIPLoading">送出</Btn>
-          <Btn @click="isOpen = false" :disabled="isWIPLoading">關閉</Btn>
+          <Btn
+            @click="handleSubmit"
+            :disabled="editList.isLoading.value || createList.isLoading.value"
+            >送出</Btn
+          >
+          <Btn
+            @click="isOpen = false"
+            :disabled="editList.isLoading.value || createList.isLoading.value"
+            >關閉</Btn
+          >
         </div>
       </template>
     </MainDialog>
